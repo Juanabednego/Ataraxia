@@ -10,7 +10,6 @@
     <link href="{{ asset('admin/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/assets/css/style.css') }}" rel="stylesheet">
- 
 </head>
 @include('layouts.AdminNav')
     <!-- Main Content -->
@@ -37,26 +36,37 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if(count($bookings) > 0)
-                                    @foreach ($bookings as $booking)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $booking->user->name }}</td>
-                                        <td>{{ implode(', ', json_decode($booking->seats)) }}</td>
-                                        <td>{{ $booking->created_at }}</td>
-                                        <td>{{ $booking->status }}</td>
-                                        <td>
-                                            @if($booking->payment)
-                                            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#paymentModal{{ $booking->id }}">Detail</button>
-                                            @endif
-                                        </td>
-                                    </tr>
+    @if(count($bookings) > 0)
+    @foreach ($bookings as $booking)
+    <tr>
+        <td>{{ $loop->iteration }}</td>
+        <td>{{ $booking->user->name }}</td>
+        <td>{{ implode(', ', json_decode($booking->seats)) }}</td>
+        <td>{{ $booking->created_at }}</td>
+        <td>
+            @if($booking->status === 'confirmed')
+                <span class="badge bg-success">{{ $booking->status }}</span>
+            @elseif($booking->status === 'waiting_payment_confirmation')
+                <span class="badge bg-danger">{{ $booking->status }}</span>
+            @elseif($booking->status === 'pending')
+                <span class="badge bg-secondary">{{ $booking->status }}</span>
+            @else
+                <span class="badge bg-secondary">{{ $booking->status }}</span>
+            @endif
+        </td>
+        <td>
+            @if($booking->payment)
+            <button class="btn" style="background-color: #8174A0; color: white;" data-bs-toggle="modal" data-bs-target="#paymentModal{{ $booking->id }}">Detail</button>
+            @endif
+        </td>
+    </tr>
+    ...
 
                                  <!-- Modal for Payment Proof -->
 <div class="modal fade" id="paymentModal{{ $booking->id }}" tabindex="-1" aria-labelledby="paymentModalLabel{{ $booking->id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: #AA389F;">
+            <div class="modal-header" style="background-color: #8174A0;">
                 <h5 class="modal-title text-white" id="paymentModalLabel{{ $booking->id }}">Konfirmasi pesanan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -102,7 +112,7 @@
 <div class="modal fade" id="imageModal{{ $booking->id }}" tabindex="-1" aria-labelledby="imageModalLabel{{ $booking->id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: #AA389F;">
+            <div class="modal-header" style="background-color: #8174A0;">
                 <h5 class="modal-title text-white" id="imageModalLabel{{ $booking->id }}">Bukti Pembayaran</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -137,7 +147,7 @@
 
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>Ataraxia</span></strong> All Rights Reserved
         </div>
     </footer>
 

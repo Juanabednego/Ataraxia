@@ -29,7 +29,7 @@ class ReviewUserController extends Controller
                 'status' => 'pending',
             ]);
 
-            return back()->with('success', 'Review berhasil dikirim dan sedang menunggu persetujuan.');
+            return back()->with('success', 'Review berhasil dikirim.');
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Terjadi kesalahan saat mengirimkan review.']);
         }

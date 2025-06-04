@@ -8,16 +8,19 @@
             background-color: #8174A0;
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
         }
+
         .custom-btn:hover {
             background-color: #7c5c99;
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
+
         .google-btn {
             border: 2px solid #DB4437;
             color: #DB4437;
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
         }
+
         .google-btn:hover {
             background-color: rgba(219, 68, 55, 0.1);
             transform: translateY(-2px);
@@ -25,29 +28,54 @@
             text-decoration: none;
         }
 
+        .login-wrapper {
+            display: flex;
+            height: 100vh;
+        }
+
+        .login-left {
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .login-left img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .login-right {
+            width: 50%;
+        }
+
         @media (max-width: 768px) {
             .login-wrapper {
                 flex-direction: column;
             }
+
             .login-left,
             .login-right {
                 width: 100% !important;
+                height: 50vh;
+            }
+
+            .login-left img {
+                height: 100%;
             }
         }
     </style>
 @endsection
 
 @section('content')
-<div class="d-flex min-vh-100 login-wrapper">
-    <!-- Left Side: Logo -->
-    <div class="d-flex justify-content-center align-items-center bg-dark login-left" style="width: 50%;">
-        <div class="text-center text-white">
-            <img src="{{ asset('assets/img/Ataraxia.jpg') }}" alt="Ataraxia Logo" class="img-fluid" style="max-width: 80%;">
-        </div>
+<div class="login-wrapper">
+    <!-- Left Side: Full Background Image -->
+    <div class="login-left bg-dark">
+        <img src="{{ asset('assets/img/Ataraxia.jpg') }}" alt="Ataraxia Logo" class="img-fluid">
     </div>
 
     <!-- Right Side: Login Form -->
-    <div class="d-flex flex-column justify-content-center align-items-center bg-white login-right" style="width: 50%;">
+    <div class="d-flex flex-column justify-content-center align-items-center bg-white login-right">
         <div class="w-100 px-4" style="max-width: 400px;">
             <h3 class="text-center fw-bold mb-4">LOGIN</h3>
 

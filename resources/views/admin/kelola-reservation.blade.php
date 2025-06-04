@@ -149,7 +149,7 @@
 <footer id="footer" class="footer mt-auto py-3 bg-light">
     <div class="container">
         <div class="text-center text-muted">
-            &copy; {{ date('Y') }} <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+            &copy; {{ date('Y') }} <strong><span>Ataraxia</span></strong> All Rights Reserved
         </div>
     </div>
 </footer>

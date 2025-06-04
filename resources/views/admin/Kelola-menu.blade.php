@@ -16,7 +16,12 @@
         @endif
 
         <!-- Button untuk tambah makanan/minuman -->
-        <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addMakananModal">Tambah Makanan/Minuman</button>
+<button class="btn mb-3"
+        style="background-color: #8174A0; border-color: #8174A0; color: white;"
+        data-bs-toggle="modal"
+        data-bs-target="#addMakananModal">
+    Tambah Makanan/Minuman
+</button>
 
         <!-- Table List Makanan/Minuman -->
         <table class="table table-striped">
@@ -44,16 +49,18 @@
                         <td>{{ number_format($makanan->harga , 0 , ',' , '.') }}</td>
                         <td>
                             <!-- Tombol Edit -->
-                            <button type="button" class="btn btn-warning btn-sm"
-                                 data-bs-toggle="modal"
-                                  data-bs-target="#editMakananModal"
-                                  data-id="{{ $makanan->id }}"
-                                     data-nama="{{ $makanan->nama_makanan }}"
-                                  data-deskripsi="{{ $makanan->deskripsi }}"
-                                 data-harga="{{ $makanan->harga }}"
-                                 data-role="{{ $makanan->role }}">
-                                   Edit
-                                    </button>
+                            <button type="button"
+        class="btn btn-sm"
+        style="background-color: #8174A0; border-color: #8174A0; color: white;"
+        data-bs-toggle="modal"
+        data-bs-target="#editMakananModal"
+        data-id="{{ $makanan->id }}"
+        data-nama="{{ $makanan->nama_makanan }}"
+        data-deskripsi="{{ $makanan->deskripsi }}"
+        data-harga="{{ $makanan->harga }}"
+        data-role="{{ $makanan->role }}">
+    Edit
+</button>
 
 
                             <!-- Tombol Hapus -->
@@ -153,7 +160,11 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-          <button type="submit" class="btn btn-primary">Update</button>
+<button type="submit"
+        class="btn"
+        style="background-color: #8174A0; border-color: #8174A0; color: white;">
+    Update
+</button>
         </div>
       </form>
     </div>
@@ -197,7 +208,7 @@ document.getElementById('edit_role').value = role;
 <footer id="footer" class="footer mt-auto py-3 bg-light">
     <div class="container">
         <div class="text-center text-muted">
-            &copy; {{ date('Y') }} <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+            &copy; {{ date('Y') }} <strong><span>Ataraxia</span></strong> All Rights Reserved
         </div>
     </div>
 </footer>

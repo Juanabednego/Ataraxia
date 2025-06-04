@@ -30,23 +30,54 @@
         transition: all 0.3s ease;
     }
 
+    .register-wrapper {
+        display: flex;
+        height: 100vh;
+    }
+
+    .register-left {
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .register-left img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .register-right {
+        width: 50%;
+    }
+
     @media (max-width: 768px) {
-        img {
-            width: 60%;
+        .register-wrapper {
+            flex-direction: column;
+        }
+
+        .register-left,
+        .register-right {
+            width: 100% !important;
+            height: 50vh;
+        }
+
+        .register-left img {
+            height: 100%;
         }
     }
 </style>
 @endsection
 
 @section('content')
-<div class="container-fluid min-vh-100 d-flex flex-column flex-md-row p-0">
-    <!-- Left Side (Logo) -->
-    <div class="col-md-6 d-none d-md-flex justify-content-center align-items-center bg-dark text-white">
-        <img src="{{ asset('assets/img/Ataraxia.jpg') }}" alt="Logo" class="img-fluid" style="max-width: 70%;">
+<div class="register-wrapper">
+    <!-- Left Side: Full Background Image -->
+    <div class="register-left bg-dark">
+        <img src="{{ asset('assets/img/Ataraxia.jpg') }}" alt="Logo">
     </div>
 
-    <!-- Right Side (Form Register) -->
-    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center bg-white py-5 px-3">
+    <!-- Right Side: Register Form -->
+    <div class="d-flex flex-column justify-content-center align-items-center bg-white register-right px-3 py-5">
         <div class="w-100" style="max-width: 400px;">
             <h3 class="text-center fw-bold mb-4">Register</h3>
 

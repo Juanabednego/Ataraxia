@@ -85,7 +85,11 @@
 
                         {{-- Tombol Simpan --}}
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary px-4">Simpan Perubahan</button>
+<button type="submit"
+        class="btn px-4"
+        style="background-color: #8174A0; border-color: #8174A0; color: white;">
+    Simpan Perubahan
+</button>
                         </div>
                     </form>
                 </div>

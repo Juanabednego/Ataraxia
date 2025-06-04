@@ -43,7 +43,7 @@
         }
 
         .seat.selected {
-            background-color: #007bff;
+            background-color: #8174A0;
         }
 
         .seat.booked {
@@ -52,7 +52,7 @@
         }
 
         .seat:hover:not(.booked) {
-            background-color: blue !important;
+            background-color: #8174A0 !important;
         }
 
         .stage {
@@ -99,7 +99,11 @@
             @endforeach
           </select>
         </div>
-        <button type="submit" class="btn btn-primary">Pilih Event</button>
+<button type="submit"
+        class="btn"
+        style="background-color: #8174A0; border-color: #8174A0; color: white;">
+    Pilih Event
+</button>
       </form>
     @else
       <!-- Builder Layout Kursi -->

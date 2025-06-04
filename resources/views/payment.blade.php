@@ -14,13 +14,13 @@
 
     <style>
         body {
-            background-color: #ffffff; /* Dark background */
-            color: rgb(0, 0, 0); /* Text color */
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
         }
         .container {
             max-width: 500px;
             margin-top: 50px;
-            background: rgb(255, 255, 255); /* White background */
+            background: rgb(255, 255, 255);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 4px 10px #8174A0;
@@ -29,16 +29,22 @@
             background-color: #6c757d;
             border: none;
         }
+        .btn-back:hover {
+            background-color: #5a6268; /* Abu-abu lebih gelap saat hover */
+        }
         .btn-primary {
-            background-color: #4CAF50; /* Purple button */
+            background-color: #4CAF50;
             border: none;
+        }
+        .btn-primary:hover {
+            background-color: #388E3C; /* Hijau lebih gelap saat hover */
         }
         .form-label {
             font-weight: bold;
         }
         .modal-content {
-            background-color: #F44336; /* Modal background */
-            color: #ffffff; /* Text color in modal */
+            background-color: #F44336;
+            color: #ffffff;
         }
         .form-select, .form-control {
             background-color: rgb(248, 250, 248);
@@ -47,10 +53,10 @@
         .payment-details {
             margin-top: 20px;
             padding: 10px;
-            background-color: rgb(255, 255, 255); /* Light background for details */
+            background-color: rgb(255, 255, 255);
             color: #000;
             border-radius: 8px;
-            display: none; /* Initially hide payment details */
+            display: none;
         }
         .payment-details div {
             display: flex;
@@ -65,10 +71,10 @@
         }
         .payment-details .copy-btn i {
             font-size: 18px;
-            color: #B5338A; /* Purple icon */
+            color: #B5338A;
         }
         .payment-details .copy-btn:hover i {
-            color: #F44336; /* Darker color when hovering */
+            color: #F44336;
         }
     </style>
 </head>
@@ -93,7 +99,7 @@
                 </select>
             </div>
 
-            <!-- Display account details (account number + copy icon) -->
+            <!-- Display account details -->
             <div id="paymentDetails" style="display: none;">
                 <div>
                     <span id="accountNumber"></span>
@@ -109,10 +115,10 @@
                 <input type="file" name="proof_of_payment" accept="image/*" class="form-control" required>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Konfirmasi Pembayaran</button>
+            <button type="submit" class="btn btn-primary w-100">Bayar</button>
         </form>
 
-        <!-- Back button -->
+        <!-- Tombol Kembali -->
         <button onclick="history.back()" class="btn btn-back w-100 mt-3">Kembali</button>
     </div>
 
@@ -137,13 +143,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Function to show account number and account name based on selected payment method
+        // Tampilkan detail rekening saat metode pembayaran dipilih
         $("select[name='payment_method']").change(function() {
             var paymentMethod = $(this).val();
             var accountNumber = '';
             var accountName = '';
 
-            if (paymentMethod === 'BRI') {
+            if (paymentMethod === 'bca') {
                 accountNumber = '3829-0102-7786-533';
                 accountName = 'Nama Rekening: David Simanjuntak';
             } else if (paymentMethod === 'mandiri') {
@@ -157,25 +163,25 @@
                 accountName = 'Nama Rekening: David Simanjuntak';
             }
 
-            // Display account number and name
             $("#accountNumber").text('Nomor Rekening: ' + accountNumber);
             $("#accountName").text(accountName);
-            $("#paymentDetails").show(); // Show payment details
+            $("#paymentDetails").show();
 
-            // Handle the click event for the copy button (only copy account number)
-            $("#copyButton").click(function() {
-                var copyText = document.getElementById("accountNumber").textContent; // Only copy the account number
-                navigator.clipboard.writeText(copyText) // Copy to clipboard
+            // Event handler copy hanya satu kali
+            $("#copyButton").off("click").on("click", function(e) {
+                e.preventDefault();
+                var copyText = accountNumber;
+                navigator.clipboard.writeText(copyText)
                     .then(function() {
-                        alert("Nomor rekening disalin: " + copyText); // Success message
+                        alert("Nomor rekening disalin: " + copyText);
                     })
                     .catch(function(error) {
-                        alert("Gagal menyalin: " + error); // Error message
+                        alert("Gagal menyalin: " + error);
                     });
             });
         });
 
-        // Submit form
+        // Submit form dengan AJAX
         $("#paymentForm").submit(function(event) {
             event.preventDefault();
             let formData = new FormData(this);
@@ -187,7 +193,7 @@
                 contentType: false,
                 processData: false,
                 success: function() {
-                    $("#confirmationModal").modal("show"); // Show confirmation modal
+                    $("#confirmationModal").modal("show");
                 },
                 error: function() {
                     alert("Terjadi kesalahan, silakan coba lagi.");
