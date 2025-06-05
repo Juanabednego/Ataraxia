@@ -273,47 +273,48 @@ h6 {
 /* Mobile Navigation */
 /* Mobile Navigation Fix */
 @media (max-width: 1199px) {
+
   /* Perbaikan untuk dropdown user dan notifikasi */
-  .nav-item.dropdown, 
+  .nav-item.dropdown,
   .dropdown.d-inline {
     position: static !important;
     display: block !important;
   }
-  
+
   .dropdown-menu {
     position: absolute !important;
     right: 15px !important;
     left: auto !important;
     width: 280px !important;
   }
-  
+
   /* Atur ulang z-index */
   .header {
     z-index: 1000;
     position: relative;
   }
-  
+
   /* Pastikan toggle menu terlihat */
   .mobile-nav-toggle {
     z-index: 1001;
     position: relative;
   }
-  
+
   /* Perbaikan layout navmenu */
   .navmenu {
     order: 2;
     width: 100%;
   }
-  
-  .navmenu > ul {
+
+  .navmenu>ul {
     flex-direction: column;
     background: white;
     padding: 20px 0;
     margin-top: 15px;
   }
-  
+
   /* Atur container header */
-  .header > .container {
+  .header>.container {
     flex-wrap: wrap;
   }
 
@@ -698,8 +699,7 @@ p {
 .sitename {
   font-family: "Dash Horizon", sans-serif;
   font-size: 20px;
-  text-shadow: 2px 2px 4px rgba(129, 116, 160, 0.7);
-
+  /* text-shadow: 2px 2px 4px rgba(129, 116, 160, 0.7); */
 }
 
 /* Gambar Latar */

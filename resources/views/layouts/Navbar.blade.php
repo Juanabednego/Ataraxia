@@ -274,7 +274,74 @@
     });
   });
 </script>
+<script>
+   function loadUserNotifikasi() {
+      $.get("{{ route('load-notifikasi') }}", function (data) {
+        let html = "";
 
+        if (data.length > 0) {
+          $("#notificationBadge").show().text(data.length);
+
+          data.forEach(n => {
+            html += `
+              <li>
+                <a href="#" 
+                   class="dropdown-item py-2 px-3 d-flex align-items-start gap-3 hover-highlight view-notif-detail"
+                   data-message="${n.message}" 
+                   data-time="${n.created_at}">
+                  <i class="bi bi-check-circle-fill text-success fs-5 mt-1"></i>
+                  <div class="flex-grow-1">
+                    <div class="fw-semibold text-dark text-truncate-2-lines">${n.message}</div>
+                    <small class="text-muted">${n.created_at}</small> <br>
+                    <small class="text-muted">"Klik to detail"</small>
+                  </div>
+                </a>
+              </li>
+            `;
+          });
+
+        } else {
+          html = `<li>
+            <a class="dropdown-item py-2 px-3 text-muted">Tidak ada notifikasi</a>
+          </li>`;
+          $("#notificationBadge").hide();
+        }
+
+        $("#notificationDropdownList").html(html);
+      });
+    }
+
+    loadUserNotifikasi();
+    setInterval(loadUserNotifikasi, 10000); // 10 detik
+
+    $(document).on("click", ".view-notif-detail", function (e) {
+      e.preventDefault();
+      const message = $(this).data("message");
+      const time = $(this).data("time");
+
+      $("#notificationDetailMessage").text(message);
+      $("#notificationDetailTime").text("Diterima: " + time);
+      $("#notificationDetailModal").modal("show");
+    });
+    
+  </script>
+<!-- MODAL DETAIL NOTIFIKASI -->
+  <div class="modal fade" id="notificationDetailModal" tabindex="-1" aria-labelledby="notificationDetailLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content shadow rounded-3">
+        <div class="modal-header border-0">
+          <h5 class="modal-title" id="notificationDetailLabel">Detail</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-1 fw-semibold" id="notificationDetailMessage">...</p>
+          <p style="font-size: 12px;">Mohon tunjukkan detail ini kepada tim penulis guna keperluan verifikasi akses Anda.</p>
+          <br>
+          <small class="text-muted" id="notificationDetailTime">...</small>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

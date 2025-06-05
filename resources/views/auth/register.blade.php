@@ -66,6 +66,23 @@
             height: 100%;
         }
     }
+    .password-toggle-btn {
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        color: #8174A0;
+        font-size: 1.1rem;
+        padding: 0;
+        line-height: 1;
+    }
+    .password-toggle-btn:focus {
+        outline: none;
+        color: #5a4e7c;
+    }
 </style>
 @endsection
 
@@ -112,19 +129,20 @@
                     @error('gender')<div><span class="text-danger small">{{ $message }}</span></div>@enderror
                 </div>
 
-                <div class="mb-3">
-                    <input type="text" name="username" class="form-control rounded-pill @error('username') is-invalid @enderror" placeholder="Username" value="{{ old('username') }}" required>
-                    @error('username')<span class="text-danger small">{{ $message }}</span>@enderror
-                </div>
+            <div class="mb-3 position-relative">
+    <input type="password" name="password" id="password" class="form-control rounded-pill @error('password') is-invalid @enderror" placeholder="Password" autocomplete="new-password" required>
+    <button type="button" class="password-toggle-btn" onclick="togglePassword('password', this)">
+       <i class="fas fa-eye-slash"></i>
+    </button>
+    @error('password')<span class="text-danger small">{{ $message }}</span>@enderror
+</div>
 
-                <div class="mb-3">
-                    <input type="password" name="password" class="form-control rounded-pill @error('password') is-invalid @enderror" placeholder="Password" autocomplete="new-password" required>
-                    @error('password')<span class="text-danger small">{{ $message }}</span>@enderror
-                </div>
-
-                <div class="mb-3">
-                    <input type="password" name="password_confirmation" class="form-control rounded-pill" placeholder="Konfirmasi Password" required>
-                </div>
+<div class="mb-3 position-relative">
+    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control rounded-pill" placeholder="Konfirmasi Password" required>
+    <button type="button" class="password-toggle-btn" onclick="togglePassword('password_confirmation', this)">
+       <i class="fas fa-eye-slash"></i>
+    </button>
+</div>
 
                 <div class="d-grid mb-3">
                     <button type="submit" class="btn text-white fw-bold rounded-pill custom-btn">
@@ -140,4 +158,21 @@
         </div>
     </div>
 </div>
+<script>
+function togglePassword(fieldId, btn) {
+    const input = document.getElementById(fieldId);
+    const icon = btn.querySelector('i');
+
+    if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    } else {
+        input.type = "password";
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    }
+}
+</script>
 @endsection
+

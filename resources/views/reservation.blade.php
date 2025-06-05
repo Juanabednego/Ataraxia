@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Reservasi Restoran</title>
+<!-- Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -107,9 +109,10 @@
           <label for="date" class="form-label">Tanggal</label>
           <input type="date" name="date" class="form-control" id="date" required min="{{ date('Y-m-d') }}" />
         </div>
-        <div class="mb-3">
+    <div class="mb-3">
           <label for="time" class="form-label">Jam</label>
-          <input type="time" name="time" class="form-control" id="time" required />
+        <input type="text" name="time" class="form-control" id="time" placeholder="Pilih jam (01:00 - 23:59)" required />
+
         </div>
 
         <div class="house-rules mb-3">
@@ -220,6 +223,20 @@
 
   <!-- Bootstrap Bundle JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+  flatpickr("#time", {
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i", // format 24 jam
+    time_24hr: true,
+    minTime: "01:00",
+    maxTime: "23:59",
+    defaultHour: 10,
+    defaultMinute: 0
+  });
+</script>
 
   <script>
     function showStep(step) {
@@ -317,7 +334,7 @@
 
         if (response.ok) {
           alert("Reservasi berhasil dikonfirmasi!");
-          window.location.href = "/";
+          window.location.href = "/histori";
         } else {
           const err = await response.json();
           alert(err.message || "Gagal mengirim reservasi.");

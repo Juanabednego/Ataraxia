@@ -43,8 +43,13 @@
             font-weight: bold;
         }
         .modal-content {
+<<<<<<< HEAD
             background-color: #F44336;
             color: #ffffff;
+=======
+            background-color:rgb(255, 255, 255); /* Modal background */
+            color:rgb(21, 21, 21); /* Text color in modal */
+>>>>>>> 0bab31a2d16c8499c4818cbcb2dc89e9a7882b01
         }
         .form-select, .form-control {
             background-color: rgb(248, 250, 248);
@@ -74,7 +79,11 @@
             color: #B5338A;
         }
         .payment-details .copy-btn:hover i {
+<<<<<<< HEAD
             color: #F44336;
+=======
+            color:rgb(255, 255, 255); /* Darker color when hovering */
+>>>>>>> 0bab31a2d16c8499c4818cbcb2dc89e9a7882b01
         }
     </style>
 </head>

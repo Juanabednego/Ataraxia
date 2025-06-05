@@ -199,11 +199,6 @@
           <h1 style="font-family: 'Dash Horizon', sans-serif">Ataraxia</h1><br>
           <p style="color: white">ATARAKAN PERASAANMU DI ATARAXIA</p>
           <p class="open-hours" style="color: white">We are open from <br> 10:00 - 23:00</p>
-          <a href="/reservation"
-             class="btn btn-lg mt-3"
-             style="background-color:#8174A0; color:rgb(255, 255, 255); border-radius: 30px; padding: 12px 32px; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: all 0.3s;">
-            Reservation
-          </a>
         </div>
       </div>
     </section>

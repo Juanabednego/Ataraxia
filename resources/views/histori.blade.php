@@ -205,10 +205,11 @@
             {{ $statusLabels[$booking->status] }}
         </div>
 
-        <div class="booking-actions">
-
-            <a href="https://wa.me/6283114596027" target="_blank">hubungi admin</a>
-        </div>
+         <div class="booking-actions">
+    <a href="https://wa.me/6283114596027" target="_blank" class="btn btn-success d-flex align-items-center gap-2">
+        <i class="bi bi-whatsapp"></i> Hubungi Admin
+    </a>
+</div>
     </div>
 </div>
 @endforeach
@@ -262,8 +263,11 @@
                 </div>
 
                 <div class="booking-actions">
-                    <a href="https://wa.me/6283114596027" target="_blank">hubungi admin</a>
-                </div>
+    <a href="https://wa.me/6283114596027" target="_blank" class="btn btn-success d-flex align-items-center gap-2">
+        <i class="bi bi-whatsapp"></i> Hubungi Admin
+    </a>
+</div>
+
             </div>
         </div>
     @endforeach

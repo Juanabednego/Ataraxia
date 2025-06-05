@@ -53,9 +53,9 @@ class RegisteredUserController extends Controller
             'phone' => $request->phone,  // Menyimpan nomor telepon
         ]);a
 
-        event(new Registered($user));
+        // event(new Registered($user));
 
-        Auth::login($user);
+        // Auth::login($user);
 
         return redirect('/');
     }

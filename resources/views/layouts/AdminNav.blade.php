@@ -135,7 +135,7 @@ $latestNotifs = AdminNotification::latest()->take(5)->get();
         <li class="nav-item">
           <a class="nav-link "  href="/tables-data">
             <i class="bi bi-cart"></i>
-            <span>Pemesanan Tiket</span>
+            <span>Pemesanan</span>
           </a>
         </li>
         <li class="nav-item">

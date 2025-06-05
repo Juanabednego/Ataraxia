@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/book-table';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -70,5 +71,22 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'phone' => $data['phone']
         ]);
+    }
+
+    /**
+     * The user has been registered.
+     * Override this to logout user after register so user must login manually.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function registered(Request $request, $user)
+    {
+        // Logout user immediately after registration
+        auth()->logout();
+
+        // Redirect to login page with success message
+        return redirect()->route('login')->with('registered', true);
     }
 }
