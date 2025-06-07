@@ -44,6 +44,19 @@
       border-left: 4px solid #0d6efd;
     }
 
+    /* Larger icons for user states */
+    .user-icon {
+      font-size: 1.5rem !important; /* Larger size for both states */
+    }
+    
+    .logged-in-icon {
+      color: #000000 !important;
+    }
+    
+    .logged-out-icon {
+      color: #000000 !important;
+    }
+
     /* Bayangan dan radius lembut */
     .dropdown-menu {
       border-radius: 12px;
@@ -52,13 +65,24 @@
       max-height: 400px;
       overflow-y: auto;
       backdrop-filter: blur(10px);
+      font-size: 0.85rem;
+      min-width: 280px;
     }
 
+    .notification-icon {
+      font-size: 1.2rem;
+    }
+    
+    .dropdown-item {
+      padding: 0.4rem 1rem;
+    }
+    
     /* Badge animasi pulse */
     #notificationBadge {
       animation: pulseBadge 1.5s infinite;
-      font-size: 0.65rem;
-      padding: 0.3em 0.5em;
+      font-size: 0.55rem;
+      padding: 0.2em 0.4em;
+      top: -5px;
     }
 
     @keyframes pulseBadge {
@@ -66,21 +90,38 @@
         transform: scale(1);
         opacity: 1;
       }
-
       50% {
         transform: scale(1.2);
         opacity: 0.8;
       }
-
       100% {
         transform: scale(1);
         opacity: 1;
       }
     }
 
+    /* Ikon login/logout */
+    .fa-sign-in-alt {
+      transform: rotate(90deg);
+      margin-left: 5px;
+    }
+
+    .fa-user-circle {
+      color: #8174A0 !important;
+    }
+
+    /* Spacing antara ikon */
+    .icon-group {
+      gap: 1.2rem !important;
+    }
+
+    /* Jarak notifikasi dari user icon */
+    .notification-container {
+      margin-right: 10px;
+    }
+
     .btn-login i {
       font-size: 28px;
-      /* Ukuran ikon, bisa disesuaikan */
     }
 
     .nav-bold li a {
@@ -93,7 +134,6 @@
 
     .navmenu ul li a:hover {
       color: #8174A0;
-      /* atau warna tema kamu */
       text-decoration: none;
     }
 
@@ -103,7 +143,6 @@
 
     .logo-img {
       height: 40px;
-      /* Atur tinggi logo supaya tidak terlalu besar */
       width: auto;
     }
 
@@ -147,41 +186,39 @@
 
           <!-- Menu Items -->
           <div class="collapse navbar-collapse" id="navbarMenu">
-           <ul class="navbar-nav ms-auto mb-2 mb-xl-0">
-  <li class="nav-item">
-    <a class="nav-link {{ request()->routeIs('index') ? 'active' : '' }}" href="{{ route('index') }}">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link {{ request()->is('events*') ? 'active' : '' }}" href="#"  id="navEventsLink">Events</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link {{ request()->is('menu') ? 'active' : '' }}" href="#" id="navMenuLink">Menu</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link {{ request()->is('reservation') ? 'active' : '' }}" href="/reservation">Reservation</a>
-  </li>
-</ul>
-
+            <ul class="navbar-nav ms-auto mb-2 mb-xl-0">
+              <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('index') ? 'active' : '' }}" href="{{ route('index') }}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{ request()->is('events*') ? 'active' : '' }}" href="#" id="navEventsLink">Events</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{ request()->is('menu') ? 'active' : '' }}" href="#" id="navMenuLink">Menu</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{ request()->is('reservation') ? 'active' : '' }}" href="/reservation">Reservation</a>
+              </li>
+            </ul>
           </div>
         </div>  
       </nav>
 
       <!-- Icon Notifikasi dan User di sebelah kanan -->
-      <div class="d-flex align-items-center ms-3 gap-3">
+      <div class="d-flex align-items-center ms-3 icon-group">
         @auth
         <!-- Notifikasi -->
-        <div class="nav-item dropdown position-relative">
+        <div class="nav-item dropdown position-relative notification-container">
           <a class="nav-link dropdown-toggle d-flex align-items-center position-relative" href="#" id="notificationDropdown"
             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-bell-fill fs-4 text-dark"></i>
+            <i class="bi bi-bell-fill notification-icon text-dark"></i>
             <span id="notificationBadge"
               class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger shadow-sm"
               style="display: none;">
               1
             </span>
           </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown"
-            style="min-width: 320px; max-width: 360px;">
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
             <li class="dropdown-header fw-bold text-dark px-3 pt-2">🔔 Notifikasi Terbaru</li>
             <li>
               <a class="dropdown-item py-2 px-3 d-flex align-items-start gap-3 hover-highlight" href="#">
@@ -195,15 +232,14 @@
           </ul>
         </div>
 
-        <!-- User Dropdown -->
+        <!-- User Dropdown (sudah login) -->
         <div class="dropdown">
           <button class="btn p-0 border-0 bg-transparent d-flex align-items-center" type="button" id="userDropdown"
             data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-user fs-5 text-dark"></i>
+            <i class="fas fa-user fs-5 text-dark user-icon logged-in-icon"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-end shadow rounded-3 border-0 mt-2" aria-labelledby="userDropdown">
-            <li><button class="dropdown-item py-2" data-bs-toggle="modal" data-bs-target="#accountModal">Akun Saya</button>
-            </li>
+            <li><a class="dropdown-item py-2" href="{{ route('akun') }}">Akun Saya</a></li>
             <li><a class="dropdown-item py-2" href="/histori">Histori</a></li>
             <li>
               <form action="{{ route('logout') }}" method="POST" class="m-0">
@@ -216,66 +252,53 @@
         @endauth
 
         @guest
-        <a href="/login" class="btn p-0 border-0 bg-transparent d-flex align-items-center" style="line-height: 1;">
-          <i class="fas fa-user fs-5 text-dark"></i>
+        <!-- Ikon login (belum login) -->
+        <a href="/login" class="btn p-0 border-0 bg-transparent d-flex align-items-center">
+          <i class="fas fa-right-to-bracket fs-5 text-dark user-icon logged-out-icon"></i>
         </a>
         @endguest
       </div>
     </div>  
   </header>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
   <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const navEventsLink = document.getElementById('navEventsLink');
+    document.addEventListener('DOMContentLoaded', function () {
+      const navEventsLink = document.getElementById('navEventsLink');
 
-    navEventsLink.addEventListener('click', function (e) {
-      e.preventDefault();
+      navEventsLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        const currentPath = window.location.pathname;
 
-      // Cek halaman saat ini
-      const currentPath = window.location.pathname;
-
-      if (currentPath === '/menu', '/reservation', '/histori') {
-        // Jika di halaman menu, arahkan ke homepage dan scroll ke #events setelah load
-        window.location.href = '/#events';
-
-        // Jika ingin scroll halus setelah load (harus ada di halaman home script yg handle ini)
-      } else {
-        // Jika bukan di halaman menu, langsung scroll ke #events (misal di homepage)
-        const eventSection = document.getElementById('events');
-        if (eventSection) {
-          eventSection.scrollIntoView({ behavior: 'smooth' });
+        if (currentPath === '/menu' || currentPath === '/reservation' || currentPath === '/histori') {
+          window.location.href = '/#events';
+        } else {
+          const eventSection = document.getElementById('events');
+          if (eventSection) {
+            eventSection.scrollIntoView({ behavior: 'smooth' });
+          }
         }
-      }
-    });
-  });
-</script>
- <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const navEventsLink = document.getElementById('navMenuLink');
+      });
 
-    navEventsLink.addEventListener('click', function (e) {
-      e.preventDefault();
+      const navMenuLink = document.getElementById('navMenuLink');
+      navMenuLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        const currentPath = window.location.pathname;
 
-      // Cek halaman saat ini
-      const currentPath = window.location.pathname;
-
-      if (currentPath === '/events', '/reservation', '/histori') {
-        // Jika di halaman menu, arahkan ke homepage dan scroll ke #events setelah load
-        window.location.href = '/menu';
-
-        // Jika ingin scroll halus setelah load (harus ada di halaman home script yg handle ini)
-      } else {
-        // Jika bukan di halaman menu, langsung scroll ke #events (misal di homepage)
-        const eventSection = document.getElementById('events');
-        if (eventSection) {
-          eventSection.scrollIntoView({ behavior: 'smooth' });
+        if (currentPath === '/events' || currentPath === '/reservation' || currentPath === '/histori') {
+          window.location.href = '/menu';
+        } else {
+          const menuSection = document.getElementById('menu');
+          if (menuSection) {
+            menuSection.scrollIntoView({ behavior: 'smooth' });
+          }
         }
-      }
+      });
     });
-  });
-</script>
-<script>
-   function loadUserNotifikasi() {
+
+    function loadUserNotifikasi() {
       $.get("{{ route('load-notifikasi') }}", function (data) {
         let html = "";
 
@@ -312,7 +335,7 @@
     }
 
     loadUserNotifikasi();
-    setInterval(loadUserNotifikasi, 10000); // 10 detik
+    setInterval(loadUserNotifikasi, 10000);
 
     $(document).on("click", ".view-notif-detail", function (e) {
       e.preventDefault();
@@ -323,9 +346,9 @@
       $("#notificationDetailTime").text("Diterima: " + time);
       $("#notificationDetailModal").modal("show");
     });
-    
   </script>
-<!-- MODAL DETAIL NOTIFIKASI -->
+
+  <!-- MODAL DETAIL NOTIFIKASI -->
   <div class="modal fade" id="notificationDetailModal" tabindex="-1" aria-labelledby="notificationDetailLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-sm">
       <div class="modal-content shadow rounded-3">
@@ -343,5 +366,4 @@
     </div>
   </div>
 </body>
-
 </html>

@@ -34,8 +34,6 @@
     .modal-body {
       padding: 20px;
     }
-
-<<<<<<< HEAD
         .alert {
             margin-top: 20px;
         }
@@ -81,13 +79,10 @@
         .modal-footer {
             border-top: 1px solid rgba(0, 0, 0, 0.08);
         }
-    </style>
-=======
-    .alert {
+        .alert {
       margin-top: 20px;
     }
-  </style>
->>>>>>> 0bab31a2d16c8499c4818cbcb2dc89e9a7882b01
+    </style>
 </head>
 
 @include('layouts.AdminNav')
@@ -95,7 +90,6 @@
 <body>
 <main class="main">
     <div class="container-fluid px-4 py-4">
-<<<<<<< HEAD
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="mb-0">Event</h2>
             <button class="btn"

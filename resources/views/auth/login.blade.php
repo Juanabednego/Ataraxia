@@ -14,11 +14,10 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-<<<<<<< HEAD
 
         .google-btn {
-            border: 2px solid #DB4437;
-            color: #DB4437;
+            border: 2px solid #f9f9f9;
+            color: #0a0808;
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
         }
 
@@ -28,20 +27,6 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
             text-decoration: none;
         }
-=======
-     .google-btn {
-    border: 2px solid #757575;
-    color: #757575;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-.google-btn:hover {
-    background-color: rgba(66, 133, 244, 0.1);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(66, 133, 244, 0.2);
-    text-decoration: none;
-}
->>>>>>> 0bab31a2d16c8499c4818cbcb2dc89e9a7882b01
 
         .login-wrapper {
             display: flex;
@@ -131,11 +116,6 @@
                             {{ __('Remember Me') }}
                         </label>
                     </div>
-                    @if (Route::has('password.request'))
-                        <a class="small text-decoration-none" href="{{ route('password.request') }}" style="color: #8e7ab5;">
-                            {{ __('Lupa password?') }}
-                        </a>
-                    @endif
                 </div>
 
                 <div class="mb-3">
@@ -181,19 +161,4 @@
         });
     });
 </script>
-@if(session('registered'))
-<!-- SweetAlert2 CDN -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        Swal.fire({
-            icon: 'success',
-            title: 'Registrasi Berhasil!',
-            text: 'Silakan login menggunakan akun yang telah didaftarkan.',
-            confirmButtonColor: '#8174A0'
-        });
-    });
-</script>
-@endif
-
 @endsection

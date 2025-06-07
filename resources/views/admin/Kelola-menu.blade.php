@@ -49,17 +49,14 @@
                         <td>{{ number_format($makanan->harga , 0 , ',' , '.') }}</td>
                         <td>
                             <!-- Tombol Edit -->
-                            <button type="button"
-        class="btn btn-sm"
-        style="background-color: #8174A0; border-color: #8174A0; color: white;"
-        data-bs-toggle="modal"
+                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
         data-bs-target="#editMakananModal"
         data-id="{{ $makanan->id }}"
         data-nama="{{ $makanan->nama_makanan }}"
         data-deskripsi="{{ $makanan->deskripsi }}"
         data-harga="{{ $makanan->harga }}"
         data-role="{{ $makanan->role }}">
-    Edit
+    <i class="bi bi-pencil-square"></i>
 </button>
 
 
@@ -67,7 +64,7 @@
                             <form action="{{ route('kelola-menu.destroy', $makanan->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                                <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" onclick="return confirm('Yakin ingin menghapus?')"><i class="bi bi-trash"></i></button>
                             </form>
                         </td>
                     </tr>

@@ -62,7 +62,6 @@
       border: none;
       cursor: pointer;
       text-align: center;
-      box-shadow: 0 4px 15px rgba(122, 38, 128, 0.3);
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
@@ -146,7 +145,6 @@
 
     .review-item:hover {
       transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
     .rating i {
@@ -268,7 +266,6 @@
       <div class="container section-title" data-aos="fade-up">
         <h1 class="story-title">Our Story</h1>
       </div>
-
       @if($about)
         <div class="container-story" data-aos="fade-up">
           @if($about->image_position == 'left')

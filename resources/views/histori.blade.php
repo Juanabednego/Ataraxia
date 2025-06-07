@@ -152,7 +152,7 @@
 .booking-actions a,
 .booking-actions button {
     border: none;
-    background-color: #a240c3;
+    background-color: #8174A0;
     color: #fff;
     padding: 6px 14px;
     border-radius: 8px;
@@ -163,7 +163,7 @@
 
 .booking-actions a:hover,
 .booking-actions button:hover {
-    background-color: #891ab3;
+    background-color: #7b6ba1;
 }
 
     </style>

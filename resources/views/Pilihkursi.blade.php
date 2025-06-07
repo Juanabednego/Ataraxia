@@ -99,15 +99,49 @@
             padding: 10px;
             margin-bottom: 20px;
         }
+        
+        .booking-section {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        .custom-layout {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .left-column {
+            flex: 1;
+        }
+        
+        .right-column {
+            flex: 1;
+        }
+        
+        .floor2-container {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .floor2-seats {
+            flex: 1;
+        }
+        
+        .floor2-booking {
+            width: 300px;
+        }
     </style>
 </head>
 
 <body> 
     <div class="container mx-auto p-4 overflow-x-auto">
-        
-        <div class="row">
-            <!-- Outdoor Section -->
-            <div class="col-md-6">
+        <div class="custom-layout">
+            <!-- Left Column (Outdoor + Booking) -->
+            <div class="left-column">
+                <!-- Outdoor Section -->
                 <div class="card">
                     <h5 class="text-center">Luar Ruang</h5>
                     <div class="seat-container">
@@ -128,113 +162,136 @@
                         @endfor
                     </div>
                 </div>
+                
+                <!-- Booking Section -->
+                <div class="booking-section">
+                    <h4 class="mb-3 fw-semibold text-dark">
+                        <i class="bi bi-cash-stack me-2 text-success"></i> Total Harga: 
+                        <span id="totalPrice" class="text-success">Rp 0</span>
+                    </h4>
+
+                    <h5 class="mb-4 text-dark fw-normal">
+                        <i class="bi bi-chair me-2 text-primary"></i> Tempat Duduk: 
+                        <span id="selectedSeats" class="text-primary">-</span>
+                    </h5>
+
+                    <div class="d-flex flex-column gap-3">
+                        <button id="confirmBooking" class="btn btn-success px-4 py-2 rounded-pill shadow-sm d-flex align-items-center" disabled>
+                            Konfirmasi Pemesanan
+                        </button>
+
+                        <button class="btn btn-outline-danger px-4 py-2 rounded-pill shadow-sm d-flex align-items-center" id="cancelSelection">
+                            Batalkan
+                        </button>
+                    </div>
+                </div>
             </div>
+            
+            <!-- Right Column (Indoor) -->
+            <div class="right-column">
+                <div class="stage">Panggung</div>
+                
+                <!-- Indoor First Floor -->
+                <div class="card1">
+                    <h5 class="text-center">Dalam Ruang Lantai 1</h5>
+                    <div class="seat-container">
+                        <!-- Baris 1 (1-4) Kiri ke Kanan -->
+                        <div class="indoor-row">
+                            @foreach([1, 2, 3, 4] as $number)
+                                <div class="seat-group">
+                                    <div class="seat {{ in_array($number.'a', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'a' }}">{{ $number.'a' }}</div>
+                                    <div class="seat {{ in_array($number.'b', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'b' }}">{{ $number.'b' }}</div>
+                                    <div class="seat {{ in_array($number.'c', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'c' }}">{{ $number.'c' }}</div>
+                                    <div class="seat {{ in_array($number.'d', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'d' }}">{{ $number.'d' }}</div>
+                                </div>
+                            @endforeach
+                        </div>
 
-            <!-- Indoor Section -->
-            <div class="col-md-6">
-                <div class="stage">STAGE</div>
-                <!-- Indoor First Floor - 28 Meja (4 meja/baris) -->
-<div class="card1">
-    <h5 class="text-center">Dalam Ruang Lantai 1</h5>
-    <div class="seat-container">
-        <!-- Baris 1 (1-4) Kiri ke Kanan -->
-        <div class="indoor-row">
-            @foreach([1, 2, 3, 4] as $number)
-                <div class="seat-group">
-                    <div class="seat {{ in_array($number.'a', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'a' }}">{{ $number.'a' }}</div>
-                    <div class="seat {{ in_array($number.'b', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'b' }}">{{ $number.'b' }}</div>
-                    <div class="seat {{ in_array($number.'c', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'c' }}">{{ $number.'c' }}</div>
-                    <div class="seat {{ in_array($number.'d', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'d' }}">{{ $number.'d' }}</div>
-                </div>
-            @endforeach
-        </div>
+                        <!-- Baris 2 (8-5) Kanan ke Kiri -->
+                        <div class="indoor-row">
+                            @foreach([8, 7, 6, 5] as $number)
+                                <div class="seat-group">
+                                    <div class="seat {{ in_array($number.'a', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'a' }}">{{ $number.'a' }}</div>
+                                    <div class="seat {{ in_array($number.'b', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'b' }}">{{ $number.'b' }}</div>
+                                    <div class="seat {{ in_array($number.'c', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'c' }}">{{ $number.'c' }}</div>
+                                    <div class="seat {{ in_array($number.'d', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'d' }}">{{ $number.'d' }}</div>
+                                </div>
+                            @endforeach
+                        </div>
 
-        <!-- Baris 2 (8-5) Kanan ke Kiri -->
-        <div class="indoor-row">
-            @foreach([8, 7, 6, 5] as $number)
-                <div class="seat-group">
-                    <div class="seat {{ in_array($number.'a', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'a' }}">{{ $number.'a' }}</div>
-                    <div class="seat {{ in_array($number.'b', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'b' }}">{{ $number.'b' }}</div>
-                    <div class="seat {{ in_array($number.'c', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'c' }}">{{ $number.'c' }}</div>
-                    <div class="seat {{ in_array($number.'d', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'d' }}">{{ $number.'d' }}</div>
-                </div>
-            @endforeach
-        </div>
+                        <!-- Baris 3 (9-12) Kiri ke Kanan -->
+                        <div class="indoor-row">
+                            @foreach([9, 10, 11, 12] as $number)
+                                <div class="seat-group">
+                                    <div class="seat {{ in_array($number.'a', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'a' }}">{{ $number.'a' }}</div>
+                                    <div class="seat {{ in_array($number.'b', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'b' }}">{{ $number.'b' }}</div>
+                                    <div class="seat {{ in_array($number.'c', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'c' }}">{{ $number.'c' }}</div>
+                                    <div class="seat {{ in_array($number.'d', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'d' }}">{{ $number.'d' }}</div>
+                                </div>
+                            @endforeach
+                        </div>
 
-        <!-- Baris 3 (9-12) Kiri ke Kanan -->
-        <div class="indoor-row">
-            @foreach([9, 10, 11, 12] as $number)
-                <div class="seat-group">
-                    <div class="seat {{ in_array($number.'a', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'a' }}">{{ $number.'a' }}</div>
-                    <div class="seat {{ in_array($number.'b', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'b' }}">{{ $number.'b' }}</div>
-                    <div class="seat {{ in_array($number.'c', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'c' }}">{{ $number.'c' }}</div>
-                    <div class="seat {{ in_array($number.'d', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'d' }}">{{ $number.'d' }}</div>
-                </div>
-            @endforeach
-        </div>
+                        <!-- Baris 4 (16-13) Kanan ke Kiri -->
+                        <div class="indoor-row">
+                            @foreach([16, 15, 14, 13] as $number)
+                                <div class="seat-group">
+                                    <div class="seat {{ in_array($number.'a', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'a' }}">{{ $number.'a' }}</div>
+                                    <div class="seat {{ in_array($number.'b', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'b' }}">{{ $number.'b' }}</div>
+                                    <div class="seat {{ in_array($number.'c', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'c' }}">{{ $number.'c' }}</div>
+                                    <div class="seat {{ in_array($number.'d', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'d' }}">{{ $number.'d' }}</div>
+                                </div>
+                            @endforeach
+                        </div>
 
-        <!-- Baris 4 (16-13) Kanan ke Kiri -->
-        <div class="indoor-row">
-            @foreach([16, 15, 14, 13] as $number)
-                <div class="seat-group">
-                    <div class="seat {{ in_array($number.'a', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'a' }}">{{ $number.'a' }}</div>
-                    <div class="seat {{ in_array($number.'b', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'b' }}">{{ $number.'b' }}</div>
-                    <div class="seat {{ in_array($number.'c', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'c' }}">{{ $number.'c' }}</div>
-                    <div class="seat {{ in_array($number.'d', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'d' }}">{{ $number.'d' }}</div>
-                </div>
-            @endforeach
-        </div>
+                        <!-- Baris 5 (17-20) Kiri ke Kanan -->
+                        <div class="indoor-row">
+                            @foreach([17, 18, 19, 20] as $number)
+                                <div class="seat-group">
+                                    <div class="seat {{ in_array($number.'a', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'a' }}">{{ $number.'a' }}</div>
+                                    <div class="seat {{ in_array($number.'b', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'b' }}">{{ $number.'b' }}</div>
+                                    <div class="seat {{ in_array($number.'c', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'c' }}">{{ $number.'c' }}</div>
+                                    <div class="seat {{ in_array($number.'d', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'d' }}">{{ $number.'d' }}</div>
+                                </div>
+                            @endforeach
+                        </div>
 
-        <!-- Baris 5 (17-20) Kiri ke Kanan -->
-        <div class="indoor-row">
-            @foreach([17, 18, 19, 20] as $number)
-                <div class="seat-group">
-                    <div class="seat {{ in_array($number.'a', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'a' }}">{{ $number.'a' }}</div>
-                    <div class="seat {{ in_array($number.'b', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'b' }}">{{ $number.'b' }}</div>
-                    <div class="seat {{ in_array($number.'c', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'c' }}">{{ $number.'c' }}</div>
-                    <div class="seat {{ in_array($number.'d', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'d' }}">{{ $number.'d' }}</div>
-                </div>
-            @endforeach
-        </div>
+                        <!-- Baris 6 (24-21) Kanan ke Kiri -->
+                        <div class="indoor-row">
+                            @foreach([24, 23, 22, 21] as $number)
+                                <div class="seat-group">
+                                    <div class="seat {{ in_array($number.'a', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'a' }}">{{ $number.'a' }}</div>
+                                    <div class="seat {{ in_array($number.'b', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'b' }}">{{ $number.'b' }}</div>
+                                    <div class="seat {{ in_array($number.'c', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'c' }}">{{ $number.'c' }}</div>
+                                    <div class="seat {{ in_array($number.'d', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'d' }}">{{ $number.'d' }}</div>
+                                </div>
+                            @endforeach
+                        </div>
 
-        <!-- Baris 6 (24-21) Kanan ke Kiri -->
-        <div class="indoor-row">
-            @foreach([24, 23, 22, 21] as $number)
-                <div class="seat-group">
-                    <div class="seat {{ in_array($number.'a', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'a' }}">{{ $number.'a' }}</div>
-                    <div class="seat {{ in_array($number.'b', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'b' }}">{{ $number.'b' }}</div>
-                    <div class="seat {{ in_array($number.'c', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'c' }}">{{ $number.'c' }}</div>
-                    <div class="seat {{ in_array($number.'d', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'d' }}">{{ $number.'d' }}</div>
+                        <!-- Baris 7 (25-28) Kiri ke Kanan -->
+                        <div class="indoor-row">
+                            @foreach([25, 26, 27, 28] as $number)
+                                <div class="seat-group">
+                                    <div class="seat {{ in_array($number.'a', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'a' }}">{{ $number.'a' }}</div>
+                                    <div class="seat {{ in_array($number.'b', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'b' }}">{{ $number.'b' }}</div>
+                                    <div class="seat {{ in_array($number.'c', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'c' }}">{{ $number.'c' }}</div>
+                                    <div class="seat {{ in_array($number.'d', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'d' }}">{{ $number.'d' }}</div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="indoor-row">
+                            @foreach([32, 31, 30, 29] as $number)
+                                <div class="seat-group">
+                                    <div class="seat {{ in_array($number.'a', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'a' }}">{{ $number.'a' }}</div>
+                                    <div class="seat {{ in_array($number.'b', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'b' }}">{{ $number.'b' }}</div>
+                                    <div class="seat {{ in_array($number.'c', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'c' }}">{{ $number.'c' }}</div>
+                                    <div class="seat {{ in_array($number.'d', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'d' }}">{{ $number.'d' }}</div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
-            @endforeach
-        </div>
-
-        <!-- Baris 7 (25-28) Kiri ke Kanan -->
-        <div class="indoor-row">
-            @foreach([25, 26, 27, 28] as $number)
-                <div class="seat-group">
-                    <div class="seat {{ in_array($number.'a', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'a' }}">{{ $number.'a' }}</div>
-                    <div class="seat {{ in_array($number.'b', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'b' }}">{{ $number.'b' }}</div>
-                    <div class="seat {{ in_array($number.'c', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'c' }}">{{ $number.'c' }}</div>
-                    <div class="seat {{ in_array($number.'d', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'d' }}">{{ $number.'d' }}</div>
-                </div>
-            @endforeach
-        </div>
-        <div class="indoor-row">
-            @foreach([32, 31, 30, 29] as $number)
-                <div class="seat-group">
-                    <div class="seat {{ in_array($number.'a', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'a' }}">{{ $number.'a' }}</div>
-                    <div class="seat {{ in_array($number.'b', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'b' }}">{{ $number.'b' }}</div>
-                    <div class="seat {{ in_array($number.'c', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'c' }}">{{ $number.'c' }}</div>
-                    <div class="seat {{ in_array($number.'d', $formattedSeats) ? 'booked' : '' }}" data-seat="{{ $number.'d' }}">{{ $number.'d' }}</div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</div>
-                <br>
-
-                <!-- Second Floor -->
+                
+                <!-- Indoor Second Floor -->
                 <div class="card2">
                     <h5 class="text-center">Dalam Ruang Lantai 2</h5>
                     <div class="seat-container">
@@ -257,31 +314,6 @@
                             </div>
                         @endfor
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Booking Section -->
-        <div class="mt-5">
-            <div class="card shadow-lg border-0 rounded-4 p-4 bg-light">
-                <h4 class="mb-3 fw-semibold text-dark">
-                    <i class="bi bi-cash-stack me-2 text-success"></i> Total Harga: 
-                    <span id="totalPrice" class="text-success">Rp 0</span>
-                </h4>
-
-                <h5 class="mb-4 text-dark fw-normal">
-                    <i class="bi bi-chair me-2 text-primary"></i> Tempat Duduk: 
-                    <span id="selectedSeats" class="text-primary">-</span>
-                </h5>
-
-                <div class="d-flex gap-3">
-                    <button id="confirmBooking" class="btn btn-success px-4 py-2 rounded-pill shadow-sm d-flex align-items-center" disabled>
-                        <i class="bi bi-check2-circle me-2"></i> Konfirmasi Pemesanan
-                    </button>
-
-                    <button class="btn btn-outline-danger px-4 py-2 rounded-pill shadow-sm d-flex align-items-center" id="cancelSelection">
-                        <i class="bi bi-x-circle me-2"></i> Batalkan
-                    </button>
                 </div>
             </div>
         </div>
@@ -379,4 +411,3 @@
     </script>
 </body>
 </html>
-
